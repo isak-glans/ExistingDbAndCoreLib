@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ExistingDbAndCoreLib.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ProjectCore.Entities;
 
 namespace ExistingDbAndCoreLib.Pages
 {
@@ -19,9 +20,17 @@ namespace ExistingDbAndCoreLib.Pages
 
         public void OnGet()
         {
-            var students = _context.Students.Where(s => s.School.Id == 1).ToList();
-            var apa = students[0].FirstName;
-            var katt = 2;
+            try
+            {
+                School school = _context.Students.Include()
+                // .Where(s => s.Id == 1).include.FirstOrDefault();
+                //School school = _context.Schools.Where(s => s.Id == 1).FirstOrDefault();
+                //var students = _context.Students.Where(s => s.School.Id == 1).ToList();
+                var studentsInSchool = school.Students;
+            } catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
         }
     }
 }

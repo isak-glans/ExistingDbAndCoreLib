@@ -28,6 +28,11 @@ namespace ExistingDbAndCoreLib.DAL
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
+            BrokenOut(modelBuilder);
+        }
+
+        protected void BrokenOut(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.HasIndex(e => e.SchoolId);
@@ -36,12 +41,12 @@ namespace ExistingDbAndCoreLib.DAL
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.SchoolId);
 
-                entity.ToTable("dbo.Students");
+                entity.ToTable("Students");
             });
 
             modelBuilder.Entity<School>(entity =>
             {
-                entity.ToTable("dbo.Schools");
+                entity.ToTable("Schools");
             });
         }
     }
