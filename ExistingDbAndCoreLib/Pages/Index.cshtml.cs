@@ -22,7 +22,7 @@ namespace ExistingDbAndCoreLib.Pages
         {
             try
             {
-                School school = _context.Students.Include()
+                School school = _context.Schools.include
                 // .Where(s => s.Id == 1).include.FirstOrDefault();
                 //School school = _context.Schools.Where(s => s.Id == 1).FirstOrDefault();
                 //var students = _context.Students.Where(s => s.School.Id == 1).ToList();
